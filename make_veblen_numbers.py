@@ -29,3 +29,21 @@ for n in range(0, 1000):
     # Add the number to the image, and save it to file
     draw.text(xy, str(n), font=font, fill=hacker_green)
     img.save('veblen_number_' + str(n) + '.png')
+
+# Create a logo for the Veblen Numbers collection using the same procedure as
+# before, but now with the text VG for Veblen Good and a smaller font size.
+font = ImageFont.truetype("DejaVuSans.ttf", 200)
+width = 350
+height = 350
+img = Image.new("RGB", (width, height), black)
+draw = ImageDraw.Draw(img)
+text_width, text_height = draw.textsize("VG", font=font)
+width_offset, height_offset = font.getoffset("VG")
+text_width = text_width + width_offset
+text_height = text_height + height_offset
+top_left_x = width / 2 - text_width / 2
+top_left_y = height / 2 - text_height / 2
+xy = top_left_x, top_left_y
+draw.text(xy, "VG", font=font, fill=hacker_green)
+img.save('vg_logo.png')
+
