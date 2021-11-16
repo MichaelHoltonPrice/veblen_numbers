@@ -4,7 +4,7 @@ scarce [Veblen goods](https://en.wikipedia.org/wiki/Veblen_good). Our initial
 series consists of algorithmically generated images representing 1000 numbers 
 (the integers from 0 to 999), which are unique NFTs tracked on the Polygon
 blockchain. These exquisite Veblen Series products can be [viewed and purchased 
-on OpenSea](https://opensea.io/collection/veblen-numbers).
+on OpenSea](https://opensea.io/collection/the-veblen-series-numbers).
 
 # Who was Veblen?
 [Thorstein Veblen](https://en.wikipedia.org/wiki/Thorstein_Veblen)
