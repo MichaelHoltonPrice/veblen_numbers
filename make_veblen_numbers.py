@@ -1,20 +1,38 @@
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
+import random
+import numpy as np
 
-# We want only the best for our Veblen numbers, so use the golden ratio to set
-# the image dimensions.
-width = 1024
-height = round(width / 1.61803398875)
+# Read the base image and extract its width and height
+base_img = Image.open("veblen_numbers_base_img.jpg")
+base_img = base_img.convert("RGB") # Make sure we are in RGB "mode"
+width, height = base_img.size
 
-# Generate each image using the DejaVuSans font and green on a black background
-font = ImageFont.truetype("DejaVuSans.ttf", 400)
+# Use the following font for the numbers
+font = ImageFont.truetype("DejaVuSans.ttf", 1200)
+
+# Use a different color for each Veblen number. Each of the five colors is
+# assigned to 200 randomly chosen images.
 hacker_green = (10, 230, 20)
-black = (0, 0, 0)
+gold = (255, 215, 0)
+indian_red = (205, 92, 92)
+royal_purple = (120, 81, 169)
+deep_sky_blue = (0, 191, 255)
+
+# The list of 1000 colors
+color_list = [hacker_green for n in range(0, 200)] +\
+             [gold for n in range(0, 200)] +\
+             [indian_red for n in range(0, 200)] +\
+             [royal_purple for n in range(0, 200)] +\
+             [deep_sky_blue for n in range(0, 200)]
+# Set a seed for reproducibility, then shuffle the color list.
+random.seed(42)
+random.shuffle(color_list)
 
 for n in range(0, 1000):
-    # Initialize the image
-    img = Image.new("RGB", (width, height), black)
+    img = base_img.copy()
+    img_color = color_list[n]
 
     # Determine the offset, xy, needed to center the number
     draw = ImageDraw.Draw(img)
@@ -26,56 +44,12 @@ for n in range(0, 1000):
     top_left_y = height / 2 - text_height / 2
     xy = top_left_x, top_left_y
 
-    # Add the number to the image, and save it to file
-    draw.text(xy, str(n), font=font, fill=hacker_green)
+    # Add the number to the image
+    draw.text(xy, str(n), font=font, fill=img_color)
+
+    # Replace the non-black pixels with the chosen color
+    data = np.array(img)
+    data[(data != [0, 0, 0]).all(axis=-1)] = img_color
+    img = Image.fromarray(data, mode='RGB')
+
     img.save('veblen_number_' + str(n) + '.png')
-
-# Create a logo for the Veblen Numbers collection using the same procedure as
-# before, but now with the text VN for Veblen Good and a smaller font size.
-font = ImageFont.truetype("DejaVuSans.ttf", 200)
-width = 350
-height = 350
-img = Image.new("RGB", (width, height), black)
-draw = ImageDraw.Draw(img)
-text_width, text_height = draw.textsize("VN", font=font)
-width_offset, height_offset = font.getoffset("VN")
-text_width = text_width + width_offset
-text_height = text_height + height_offset
-top_left_x = width / 2 - text_width / 2
-top_left_y = height / 2 - text_height / 2
-xy = top_left_x, top_left_y
-draw.text(xy, "VN", font=font, fill=hacker_green)
-img.save('vn_logo.png')
-
-# Create a featured image for the Veblen Numbers collection with the text VN.
-font = ImageFont.truetype("DejaVuSans.ttf", 200)
-width = 600
-height = 400
-img = Image.new("RGB", (width, height), black)
-draw = ImageDraw.Draw(img)
-text_width, text_height = draw.textsize("VN", font=font)
-width_offset, height_offset = font.getoffset("VN")
-text_width = text_width + width_offset
-text_height = text_height + height_offset
-top_left_x = width / 2 - text_width / 2
-top_left_y = height / 2 - text_height / 2
-xy = top_left_x, top_left_y
-draw.text(xy, "VN", font=font, fill=hacker_green)
-img.save('vn_featured.png')
-
-# Create a banner image for the Veblen Numbers collection with the text
-# Veblen Numbers.
-font = ImageFont.truetype("DejaVuSans.ttf", 150)
-width = 1400
-height = 400
-img = Image.new("RGB", (width, height), black)
-draw = ImageDraw.Draw(img)
-text_width, text_height = draw.textsize("Veblen Numbers", font=font)
-width_offset, height_offset = font.getoffset("Veblen Numbers")
-text_width = text_width + width_offset
-text_height = text_height + height_offset
-top_left_x = width / 2 - text_width / 2
-top_left_y = height / 2 - text_height / 2
-xy = top_left_x, top_left_y
-draw.text(xy, "Veblen Numbers", font=font, fill=hacker_green)
-img.save('vn_banner.png')
