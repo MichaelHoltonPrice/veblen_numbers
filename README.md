@@ -1,5 +1,5 @@
 #  Background
-Veblen Numbers are rare Non-fungible Tokens (NFTs) that represent scarce
+Veblen Numbers are rare non-fungible Tokens (NFTs) that represent scarce
 [Veblen goods](https://en.wikipedia.org/wiki/Veblen_good). They are available
 for purchase at [OpenSea](https://opensea.io/) and reside on the Polygon
 blockchain. [Thorstein Veblen](https://en.wikipedia.org/wiki/Thorstein_Veblen)

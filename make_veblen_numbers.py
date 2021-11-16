@@ -31,19 +31,51 @@ for n in range(0, 1000):
     img.save('veblen_number_' + str(n) + '.png')
 
 # Create a logo for the Veblen Numbers collection using the same procedure as
-# before, but now with the text VG for Veblen Good and a smaller font size.
+# before, but now with the text VN for Veblen Good and a smaller font size.
 font = ImageFont.truetype("DejaVuSans.ttf", 200)
 width = 350
 height = 350
 img = Image.new("RGB", (width, height), black)
 draw = ImageDraw.Draw(img)
-text_width, text_height = draw.textsize("VG", font=font)
-width_offset, height_offset = font.getoffset("VG")
+text_width, text_height = draw.textsize("VN", font=font)
+width_offset, height_offset = font.getoffset("VN")
 text_width = text_width + width_offset
 text_height = text_height + height_offset
 top_left_x = width / 2 - text_width / 2
 top_left_y = height / 2 - text_height / 2
 xy = top_left_x, top_left_y
-draw.text(xy, "VG", font=font, fill=hacker_green)
-img.save('vg_logo.png')
+draw.text(xy, "VN", font=font, fill=hacker_green)
+img.save('vn_logo.png')
 
+# Create a featured image for the Veblen Numbers collection with the text VN.
+font = ImageFont.truetype("DejaVuSans.ttf", 200)
+width = 600
+height = 400
+img = Image.new("RGB", (width, height), black)
+draw = ImageDraw.Draw(img)
+text_width, text_height = draw.textsize("VN", font=font)
+width_offset, height_offset = font.getoffset("VN")
+text_width = text_width + width_offset
+text_height = text_height + height_offset
+top_left_x = width / 2 - text_width / 2
+top_left_y = height / 2 - text_height / 2
+xy = top_left_x, top_left_y
+draw.text(xy, "VN", font=font, fill=hacker_green)
+img.save('vn_featured.png')
+
+# Create a banner image for the Veblen Numbers collection with the text
+# Veblen Numbers.
+font = ImageFont.truetype("DejaVuSans.ttf", 150)
+width = 1400
+height = 400
+img = Image.new("RGB", (width, height), black)
+draw = ImageDraw.Draw(img)
+text_width, text_height = draw.textsize("Veblen Numbers", font=font)
+width_offset, height_offset = font.getoffset("Veblen Numbers")
+text_width = text_width + width_offset
+text_height = text_height + height_offset
+top_left_x = width / 2 - text_width / 2
+top_left_y = height / 2 - text_height / 2
+xy = top_left_x, top_left_y
+draw.text(xy, "Veblen Numbers", font=font, fill=hacker_green)
+img.save('vn_banner.png')
